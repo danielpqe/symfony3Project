@@ -1,4 +1,3 @@
-symfony3Project
-===============
 
-A Symfony project created on July 25, 2018, 3:30 pm.
+# symfony3Project
+This is just a project to improve my skills using symfony3 and other technologies
