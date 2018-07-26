@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.0" last-position="0,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<role name="dan"
+      inherit="true"
+      login="true"
+      encrypted="true"
+      password="********">
+</role>
+
+<database name="blog" encoding="UTF8" lc-collate="es_PE.UTF-8" lc-ctype="es_PE.UTF-8">
+	<role name="dan"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="users">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="0" y="140"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="role">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="surname">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="password">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="image">
+		<type name="bytea" length="0"/>
+	</column>
+	<column name="sys_timrow">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="users_pk" type="pk-constr" table="public.users">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="categories">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="340" y="0"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="description">
+		<type name="character varying" length="100"/>
+	</column>
+	<constraint name="categories_pk" type="pk-constr" table="public.categories">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tags">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="840" y="80"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nombre">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="description">
+		<type name="character varying" length="100"/>
+	</column>
+	<constraint name="tags_pk" type="pk-constr" table="public.tags">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="entries">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="300" y="140"/>
+	<column name="id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="user_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cotegory_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="title">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="content">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="status">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="image">
+		<type name="bytea" length="0"/>
+	</column>
+</table>
+
+<table name="entry_tag">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="740" y="240"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="entry_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="tag_id">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="entry_tag_pk" type="pk-constr" table="public.entry_tag">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="FK_entries_users" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.users" table="public.entries">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="FK_entries_categories" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.categories" table="public.entries">
+	<columns names="cotegory_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="FK_entry_tag_tag" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.tags" table="public.entry_tag">
+	<columns names="tag_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="FK_entry_tag_entries" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.entries" table="public.entry_tag">
+	<columns names="id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_entries_users" type="relfk"
+	 src-table="public.entries"
+	 dst-table="public.users"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_entries_categories" type="relfk"
+	 src-table="public.entries"
+	 dst-table="public.categories"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_entry_tag_tags" type="relfk"
+	 src-table="public.entry_tag"
+	 dst-table="public.tags"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_entry_tag_entries" type="relfk"
+	 src-table="public.entry_tag"
+	 dst-table="public.entries"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
