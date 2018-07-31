@@ -92,7 +92,9 @@ CREATE TABLE public.entry_tag(
 	id integer NOT NULL,
 	entry_id integer,
 	tag_id integer,
-	CONSTRAINT entry_tag_pk PRIMARY KEY (id)
+	CONSTRAINT entry_tag_pk PRIMARY KEY (id),
+	CONSTRAINT "UNIQUE_entry_id" UNIQUE (entry_id),
+	CONSTRAINT "UNIQUE_tag_id" UNIQUE (tag_id)
 
 );
 -- ddl-end --
@@ -122,7 +124,7 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- object: "FK_entry_tag_entries" | type: CONSTRAINT --
 -- ALTER TABLE public.entry_tag DROP CONSTRAINT IF EXISTS "FK_entry_tag_entries" CASCADE;
-ALTER TABLE public.entry_tag ADD CONSTRAINT "FK_entry_tag_entries" FOREIGN KEY (id)
+ALTER TABLE public.entry_tag ADD CONSTRAINT "FK_entry_tag_entries" FOREIGN KEY (entry_id)
 REFERENCES public.entries (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
 -- ddl-end --

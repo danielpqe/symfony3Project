@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="0,0" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.0" last-position="153,0" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
 <role name="dan"
       inherit="true"
@@ -132,6 +132,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="entry_tag_pk" type="pk-constr" table="public.entry_tag">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="UNIQUE_entry_id" type="uq-constr" table="public.entry_tag">
+		<columns names="entry_id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="UNIQUE_tag_id" type="uq-constr" table="public.entry_tag">
+		<columns names="tag_id" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <constraint name="FK_entries_users" type="fk-constr" comparison-type="MATCH FULL"
@@ -154,7 +160,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <constraint name="FK_entry_tag_entries" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.entries" table="public.entry_tag">
-	<columns names="id" ref-type="src-columns"/>
+	<columns names="entry_id" ref-type="src-columns"/>
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
