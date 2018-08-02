@@ -22,6 +22,18 @@ class Category
      */
     private $descripcion;
 
+    protected $entry;
+
+    public function __construct()
+    {
+        $this->$this->descripcion;
+    }
+
+    public function getEntries(){
+        return $this->entry;
+    }
+
+
 
     /**
      * Get id

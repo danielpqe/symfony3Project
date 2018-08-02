@@ -48,7 +48,7 @@ BlogBundle\Entity\Entry:
             cascade: {  }
             fetch: LAZY
             mappedBy: null
-            inversedBy: null
+            inversedBy: entry
             joinColumns:
                 category_id:
                     referencedColumnName: id
@@ -63,4 +63,10 @@ BlogBundle\Entity\Entry:
                 user_id:
                     referencedColumnName: id
             orphanRemoval: false
+    oneToMany:
+         entryTag:
+            targetEntity: EntryTag
+            mappedBy: entry
+            cascade: ["persist"]
+
     lifecycleCallbacks: {  }

@@ -42,6 +42,13 @@ class Entry
      */
     private $user;
 
+    protected $entryTag;
+
+    public function __construct()
+    {
+        $this->entryTag = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -156,7 +163,7 @@ class Entry
      *
      * @return Entry
      */
-    public function setCategory(\BlogBundle\Entity\Categories $category = null)
+    public function setCategory(\BlogBundle\Entity\Category $category = null)
     {
         $this->category = $category;
 
@@ -180,7 +187,7 @@ class Entry
      *
      * @return Entry
      */
-    public function setUser(\BlogBundle\Entity\Users $user = null)
+    public function setUser(\BlogBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -195,6 +202,16 @@ class Entry
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function addEntryTag(\BlogBundle\Entity\Tag $tag){
+        $this->entryTag[] = $tag;
+
+        return $this;
+    }
+
+    public function getEntryTag(){
+        return $this->entryTag;
     }
 }
 
